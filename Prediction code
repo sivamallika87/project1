@@ -1,0 +1,16 @@
+import pickle
+import numpy as np
+
+# Load saved model
+model = pickle.load(open("svc_model.pkl", "rb"))
+le = pickle.load(open("label_encoder.pkl", "rb"))
+
+# Example input (symptoms)
+# Format: [symptom1, symptom2, symptom3, symptom4]
+user_input = np.array([[1, 0, 1, 0]])
+
+# Predict
+prediction = model.predict(user_input)
+disease = le.inverse_transform(prediction)
+
+print("Predicted Disease:", disease[0])
